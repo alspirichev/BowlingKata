@@ -63,11 +63,20 @@ class BowlingKataTests: XCTestCase {
         
         XCTAssertEqual(2+2, sut.score)
     }
+    
+    func test_when20Roll_thenGameIsFinished() {
+        for _ in 1...20 {
+            sut.roll(4)
+        }
+        
+        XCTAssertTrue(sut.isFinished)
+    }
 }
 
 
 class Game {
     var score = 0
+    var isFinished = true
     
     func roll(_ pins: Int) {
         guard pins >= 0  else { return }
