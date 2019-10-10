@@ -40,6 +40,14 @@ class BowlingKataTests: XCTestCase {
         
         XCTAssertEqual(6, game.score)
     }
+    
+    func test_whenFirstRollHas3Pins_scoreIs3() {
+        let game = Game()
+        
+        game.roll(3)
+        
+        XCTAssertEqual(3, game.score)
+    }
 }
 
 
@@ -47,6 +55,6 @@ class Game {
     var score = 0
     
     func roll(_ pins: Int) {
-        self.score = 6
+        self.score = pins
     }
 }
