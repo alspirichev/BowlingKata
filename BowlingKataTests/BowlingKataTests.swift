@@ -19,35 +19,32 @@ import XCTest
 
 class BowlingKataTests: XCTestCase {
 
+    var sut: Game!
+    
     override func setUp() {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        sut = Game()
     }
 
     override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+        sut = nil
     }
     
     func test_initialScoreIsZero() {
-        let game = Game()
-        
-        XCTAssertEqual(0, game.score)
+        XCTAssertEqual(0, sut.score)
     }
     
     func test_whenFirstRollHas6Pins_scoreIs6() {
-        let game = Game()
+        sut.roll(6)
         
-        game.roll(6)
-        
-        XCTAssertEqual(6, game.score)
+        XCTAssertEqual(6, sut.score)
     }
     
     func test_whenFirstRollHas3Pins_scoreIs3() {
-        let game = Game()
+        sut.roll(3)
         
-        game.roll(3)
-        
-        XCTAssertEqual(3, game.score)
+        XCTAssertEqual(3, sut.score)
     }
+    
 }
 
 
