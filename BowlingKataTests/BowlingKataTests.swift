@@ -9,6 +9,14 @@
 import XCTest
 @testable import BowlingKata
 
+
+// цель - сколько очков мы набрали
+// начальный счет - 0
+// один бросок - получили счет
+// количество бросков
+//
+
+
 class BowlingKataTests: XCTestCase {
 
     override func setUp() {
@@ -18,17 +26,19 @@ class BowlingKataTests: XCTestCase {
     override func tearDown() {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
-
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    
+    func test_initialScoreIsZero() {
+        let game = Game()
+        
+        XCTAssertEqual(0, game.score)
     }
+    
+    
+}
 
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
-    }
 
+class Game {
+    var score = 0
+    
+    
 }
