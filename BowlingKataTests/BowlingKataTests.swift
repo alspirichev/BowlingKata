@@ -45,6 +45,12 @@ class BowlingKataTests: XCTestCase {
         XCTAssertEqual(3, sut.score)
     }
     
+    func test_whenFirstRollHas10Pins_scoreISLessThanOrEqual10() {
+        sut.roll(10)
+        
+        XCTAssertLessThanOrEqual(10, sut.score)
+    }
+    
 }
 
 
