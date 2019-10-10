@@ -45,10 +45,10 @@ class BowlingKataTests: XCTestCase {
         XCTAssertEqual(3, sut.score)
     }
     
-    func test_whenFirstRollHas10Pins_scoreISLessThanOrEqual10() {
-        sut.roll(10)
+    func test_whenFirstRollHas16Pins_scoreIs10() {
+        sut.roll(16)
         
-        XCTAssertLessThanOrEqual(10, sut.score)
+        XCTAssertEqual(10, sut.score)
     }
     
 }
@@ -58,6 +58,6 @@ class Game {
     var score = 0
     
     func roll(_ pins: Int) {
-        self.score = pins
+        self.score = min(pins, 10)
     }
 }
