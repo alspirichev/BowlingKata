@@ -33,12 +33,20 @@ class BowlingKataTests: XCTestCase {
         XCTAssertEqual(0, game.score)
     }
     
-    
+    func test_whenFirstRollHas6Pins_scoreIs6() {
+        let game = Game()
+        
+        game.roll(6)
+        
+        XCTAssertEqual(6, game.score)
+    }
 }
 
 
 class Game {
     var score = 0
     
-    
+    func roll(_ pins: Int) {
+        self.score = 6
+    }
 }
