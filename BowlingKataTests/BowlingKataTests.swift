@@ -64,6 +64,10 @@ class BowlingKataTests: XCTestCase {
         XCTAssertEqual(2+2, sut.score)
     }
     
+    func test_whenNoRoll_thenGameIsNotFinished() {
+        XCTAssertFalse(sut.isFinished)
+    }
+    
     func test_when20Roll_thenGameIsFinished() {
         for _ in 1...20 {
             sut.roll(4)
@@ -71,14 +75,20 @@ class BowlingKataTests: XCTestCase {
         
         XCTAssertTrue(sut.isFinished)
     }
+    
 }
 
 
 class Game {
     var score = 0
-    var isFinished = true
+    var isFinished: Bool {
+        rolls == 20
+    }
+    
+    private var rolls = 0
     
     func roll(_ pins: Int) {
+        rolls += 1
         guard pins >= 0  else { return }
         self.score += min(pins, 10)
     }
