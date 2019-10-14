@@ -80,8 +80,7 @@ class BowlingKataTests: XCTestCase {
     }
     
     func test_whenSumOfTwoRollsIs10_itsSpare_shouldDoubleNextRoll() {
-        sut.roll(4)
-        sut.roll(6)
+        sut.spare(4)
         sut.roll(5)
         
         XCTAssertEqual(4+6+5*2, sut.score)
@@ -93,7 +92,7 @@ class BowlingKataTests: XCTestCase {
 class Game {
     var score: Int {
         var allScore = rolls.reduce(0, +)
-        allScore += calculateSpare()        
+        allScore += calculateSpare()
         
         return allScore
     }
@@ -131,4 +130,10 @@ extension Game {
             roll(pins)
         }
     }
+    
+    func spare(_ firstRoll: Int) {
+        roll(firstRoll)
+        roll(10 - firstRoll)
+    }
+    
 }
