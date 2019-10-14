@@ -92,7 +92,10 @@ class BowlingKataTests: XCTestCase {
 
 class Game {
     var score: Int {
-        rolls.reduce(0, +)
+        var allScore = rolls.reduce(0, +)
+        allScore += calculateSpare()        
+        
+        return allScore
     }
     
     var isFinished: Bool {
@@ -100,6 +103,21 @@ class Game {
     }
     
     private var rolls: [Int] = []
+    
+    
+    func calculateSpare() -> Int {
+        guard rolls.count == 3 else { return 0 }
+        
+        var additionalScore = 0
+        let isSpare = rolls[0] + rolls[1] == 10
+        
+        if isSpare {
+            additionalScore += rolls[2]
+        }
+        
+        
+        return additionalScore
+    }
     
     func roll(_ pins: Int) {
         guard pins >= 0  else { return }
