@@ -58,8 +58,7 @@ class BowlingKataTests: XCTestCase {
     }
     
     func test_whenRoll2PinsTwoTimes_thenScoreIs4() {
-        sut.roll(2)
-        sut.roll(2)
+        sut.roll(2, times: 2)
         
         XCTAssertEqual(2+2, sut.score)
     }
@@ -69,27 +68,49 @@ class BowlingKataTests: XCTestCase {
     }
     
     func test_when20Roll_thenGameIsFinished() {
-        for _ in 1...20 {
-            sut.roll(4)
-        }
+        sut.roll(4, times: 20)
         
         XCTAssertTrue(sut.isFinished)
+    }
+    
+    func testMaxScore() {
+        sut.roll(10, times: 10)
+        
+        XCTAssertEqual(10*10, sut.score)
+    }
+    
+    func test_whenSumOfTwoRollsIs10_itsSpare_shouldDoubleNextRoll() {
+        sut.roll(4)
+        sut.roll(6)
+        sut.roll(5)
+        
+        XCTAssertEqual(4+6+5*2, sut.score)
     }
     
 }
 
 
 class Game {
-    var score = 0
-    var isFinished: Bool {
-        rolls == 20
+    var score: Int {
+        rolls.reduce(0, +)
     }
     
-    private var rolls = 0
+    var isFinished: Bool {
+        rolls.count == 20
+    }
+    
+    private var rolls: [Int] = []
     
     func roll(_ pins: Int) {
-        rolls += 1
         guard pins >= 0  else { return }
-        self.score += min(pins, 10)
+        rolls.append(min(pins, 10))
+    }
+}
+
+extension Game {
+    func roll(_ pins: Int, times: Int) {
+        for _ in 1...times {
+            roll(pins)
+        }
     }
 }
